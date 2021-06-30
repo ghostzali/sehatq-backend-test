@@ -5,10 +5,10 @@ module Api
 
       # GET /schedules
       def index
-        if params[:hospital_id].nil?
-          @schedules = Schedule.includes(:doctor).all
+        @schedules = if params[:hospital_id].nil?
+          Schedule.includes(:doctor).all
         else
-          @schedules = Schedule.includes(:doctor).joins(:doctor => :placements)
+          Schedule.includes(:doctor).joins(:doctor => :placements)
                                .where(:placements => { :hospital_id => params[:hospital_id] })
         end
         group = params[:group].to_s.downcase
