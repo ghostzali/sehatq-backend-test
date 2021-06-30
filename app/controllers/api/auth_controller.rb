@@ -4,10 +4,10 @@ module Api
 
     # POST /login
     def login
-      if params[:username].nil?
-        @user = User.find_by_email(params[:email])
+      @user = if params[:username].nil?
+        User.find_by_email(params[:email])
       else
-        @user = User.find_by(username: params[:username])
+        User.find_by(username: params[:username])
       end
 
       if @user && @user.authenticate(params[:password])

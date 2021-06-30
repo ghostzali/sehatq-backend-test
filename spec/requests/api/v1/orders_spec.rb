@@ -11,11 +11,11 @@ RSpec.describe "Orders", type: :request do
   let!(:schedule) { create(:schedule) }
   let(:schedule_id) { schedule.id }
   let(:date_day) { (Date.today..Date.today+6).select { |d| schedule.day_name == d.strftime('%A') } }
-  let(:params_payload) { {
+  let(:params_payload) do {
     :hospital_id => hospital_id,
     :schedule_id => schedule_id,
     :date => date_day.first.iso8601
-  } }
+  } end
 
   describe "POST /orders" do
     before { post '/api/v1/orders', params: params_payload, headers: { :Authorization => "Bearer #{token}" } }
