@@ -27,3 +27,10 @@
 /config/master.key
 
 .env
+
+# Ignore jetbrains editors config
+.idea
+# Ignore vscode editor config
+.vscode
+
+Gemfile.lock
